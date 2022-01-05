@@ -2,12 +2,14 @@ package ru.job4j.todo.persistence;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import ru.job4j.todo.model.Item;
 
 import java.util.List;
+import java.util.function.Function;
 
 public class Persistence {
     private final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
@@ -24,29 +26,32 @@ public class Persistence {
     }
 
     public void save(Item item) {
-        Session session = sf.openSession();
-        session.beginTransaction();
-        session.save(item);
-        session.getTransaction().commit();
-        session.close();
-    }
+        tx(session -> session.save(item));
+     }
 
     public List<Item> showAll() {
-        Session session = sf.openSession();
-        session.beginTransaction();
-        List result = session.createQuery("from ru.job4j.todo.model.Item").list();
-        session.getTransaction().commit();
-        session.close();
-        return result;
+        return tx(session -> session.createQuery("from ru.job4j.todo.model.Item").list());
     }
 
     public void modifyDone(int id) {
-        Session session = sf.openSession();
-        session.beginTransaction();
-        Item item = session.find(Item.class, id);
+        Item item = tx(session -> session.find(Item.class, id));
         item.setDone(!item.isDone());
-        session.update(item);
-        session.getTransaction().commit();
-        session.close();
+        tx(session -> {
+            session.update(item);
+            return true;
+        });
+    }
+
+    private <T> T tx(Function<Session, T> command) {
+        Session session = sf.openSession();
+        try (session) {
+            Transaction tx = session.beginTransaction();
+            T result = command.apply(session);
+            tx.commit();
+            return result;
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            throw e;
+        }
     }
 }

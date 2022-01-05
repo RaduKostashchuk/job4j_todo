@@ -83,4 +83,4 @@ function drawTable() {
     })
 }
 drawTable();
-setInterval(drawTable, 10000);
+setInterval(drawTable, 30000);
