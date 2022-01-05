@@ -1,8 +1,7 @@
 package ru.job4j.todo.servlet;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.json.JSONArray;
+import ru.job4j.todo.model.Item;
 import ru.job4j.todo.persistence.Persistence;
 
 import javax.servlet.http.HttpServlet;
@@ -17,12 +16,7 @@ public class ShowAllTasksServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        SessionFactory sf = Persistence.getInstance().getSessionFactory();
-        Session session = sf.openSession();
-        session.beginTransaction();
-        List items = session.createQuery("from ru.job4j.todo.model.Item").list();
-        session.getTransaction().commit();
-        session.close();
+        List<Item> items = Persistence.getInstance().showAll();
         JSONArray json = new JSONArray(items);
         String str = json.toString();
         req.setAttribute("items", items);

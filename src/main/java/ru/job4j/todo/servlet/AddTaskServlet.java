@@ -1,7 +1,5 @@
 package ru.job4j.todo.servlet;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import ru.job4j.todo.model.Item;
 import ru.job4j.todo.persistence.Persistence;
 
@@ -17,12 +15,7 @@ public class AddTaskServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         Item item = new Item();
         item.setDescription(req.getParameter("description"));
-        SessionFactory sf = Persistence.getInstance().getSessionFactory();
-        Session session = sf.openSession();
-        session.beginTransaction();
-        session.save(item);
-        session.getTransaction().commit();
-        session.close();
+        Persistence.getInstance().save(item);
         resp.sendRedirect("index.jsp");
     }
 }
