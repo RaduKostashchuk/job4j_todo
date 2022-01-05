@@ -12,7 +12,7 @@ public class Item {
     private int id;
     private String description;
     private LocalDateTime created = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
-    private boolean done = false;
+    private boolean done;
 
     public int getId() {
         return id;
