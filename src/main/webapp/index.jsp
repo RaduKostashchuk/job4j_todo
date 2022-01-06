@@ -17,16 +17,22 @@
             integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
             crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
-
     <script>
         let context = "http://" + "<%=request.getServerName()%>"
             + ":" + "<%=request.getServerPort()%>"
             + "<%=request.getServletContext().getContextPath()%>"
     </script>
-    <script src="main.js"></script>
+    <script src="js/index.js"></script>
 </head>
 <body>
 <div class="container">
+    <div class="row">
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/logout"><c:out value="${user.name}"/> | Выйти</a>
+            </li>
+        </ul>
+    </div>
     <div class="card">
         <div class="card-header">
             <p class="h5">Добавить задачу</p>
@@ -67,6 +73,7 @@
                     <th>Номер</th>
                     <th>Описание</th>
                     <th>Создана</th>
+                    <th>Пользователь</th>
                     <th>Статус</th>
                     <th>Выполнить/Возобновить</th>
                 </tr>

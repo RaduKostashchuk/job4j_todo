@@ -17,6 +17,7 @@ public class ShowAllTasksServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         List<Item> items = Persistence.getInstance().showAll();
+        items.forEach(i -> i.getUser().setPassword(""));
         JSONArray json = new JSONArray(items);
         String str = json.toString();
         req.setAttribute("items", items);

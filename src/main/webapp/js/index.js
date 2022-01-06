@@ -48,15 +48,17 @@ function drawTable() {
             let td3 = document.createElement("td");
             let td4 = document.createElement("td");
             let td5 = document.createElement("td");
+            let td6 = document.createElement("td");
             td1.innerText = task.id;
             td2.innerText = task.description;
             const date = new Date(task.created);
             const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric',
                 hour: 'numeric', minute: 'numeric'};
             td3.innerText = date.toLocaleDateString("ru-RU", options);
-            td4.innerHTML = '<span class="badge rounded-pill bg-warning text-dark">В процессе</span>';
+            td4.innerText = task.user.name;
+            td5.innerHTML = '<span class="badge rounded-pill bg-warning text-dark">В процессе</span>';
             if (task.done === true) {
-                td4.innerHTML = '<span class="badge rounded-pill bg-success text-dark">Выполнена</span>';
+                td5.innerHTML = '<span class="badge rounded-pill bg-success text-dark">Выполнена</span>';
             }
             let input = document.createElement("input");
             input.type = "checkbox";
@@ -71,13 +73,14 @@ function drawTable() {
                 input.checked = true;
                 label.innerText = "Возобновить задачу";
             }
-            td5.append(input);
-            td5.append(label);
+            td6.append(input);
+            td6.append(label);
             tr.append(td1);
             tr.append(td2);
             tr.append(td3);
             tr.append(td4);
             tr.append(td5);
+            tr.append(td6);
             tbody.append(tr);
         }
     })
