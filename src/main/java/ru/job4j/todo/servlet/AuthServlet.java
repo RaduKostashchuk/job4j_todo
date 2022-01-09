@@ -1,5 +1,7 @@
 package ru.job4j.todo.servlet;
 
+import org.hibernate.Cache;
+import ru.job4j.todo.model.Category;
 import ru.job4j.todo.model.User;
 import ru.job4j.todo.persistence.Persistence;
 

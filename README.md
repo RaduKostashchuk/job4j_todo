@@ -2,7 +2,7 @@
 
 It is task tracking application.
 
-User can create task by giving task description.
+User can create task by giving task description and category.
 
 Task status can be changed later by checkbox.
 

@@ -18,7 +18,7 @@ public class AddTaskServlet extends HttpServlet {
         User user = (User) req.getSession().getAttribute("user");
         item.setDescription(req.getParameter("description"));
         item.setUser(user);
-        Persistence.getInstance().save(item);
+        Persistence.getInstance().save(item, req.getParameterValues("catIds"));
         resp.sendRedirect("index.jsp");
     }
 }

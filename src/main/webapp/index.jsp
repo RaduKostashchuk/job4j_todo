@@ -22,7 +22,7 @@
             + ":" + "<%=request.getServerPort()%>"
             + "<%=request.getServletContext().getContextPath()%>"
     </script>
-    <script src="js/index.js"></script>
+    <script src="js/index.js?version=18"></script>
 </head>
 <body>
 <div class="container">
@@ -40,10 +40,15 @@
         <div class="card-body form-group">
             <form action="<%=request.getContextPath()%>/add" method="post" onsubmit="return validate()">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-8 m-1">
                         <input type="text" class="form-control" id="descriptionInput" name="description" placeholder="Описание">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
+                        <select class="custom-select" id="catSelect" name="catIds" multiple>
+                            <option selected>Выберите категории</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
                         <button type="submit" class="btn btn-primary">Сохранить</button>
                     </div>
                 </div>
@@ -74,6 +79,7 @@
                     <th>Описание</th>
                     <th>Создана</th>
                     <th>Пользователь</th>
+                    <th>Категории</th>
                     <th>Статус</th>
                     <th>Выполнить/Возобновить</th>
                 </tr>

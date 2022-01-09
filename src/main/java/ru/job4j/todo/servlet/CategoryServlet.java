@@ -1,7 +1,8 @@
 package ru.job4j.todo.servlet;
 
-import org.json.JSONArray;
-import ru.job4j.todo.model.Item;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import ru.job4j.todo.model.Category;
 import ru.job4j.todo.persistence.Persistence;
 
 import javax.servlet.http.HttpServlet;
@@ -12,18 +13,15 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-public class ShowAllTasksServlet extends HttpServlet {
-
+public class CategoryServlet extends HttpServlet {
+    private static final Gson GSON = new GsonBuilder().create();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        List<Item> items = Persistence.getInstance().showAllItems();
-        items.forEach(i -> i.getUser().setPassword(""));
-        JSONArray json = new JSONArray(items);
-        String str = json.toString();
-        req.setAttribute("items", items);
-        resp.setContentType("application/json");
+        List<Category> categories = Persistence.getInstance().showAllCategories();
+        String json = GSON.toJson(categories);
         OutputStream out = resp.getOutputStream();
-        out.write(str.getBytes(StandardCharsets.UTF_8));
+        resp.setContentType("application/json; charset=utf-8");
+        out.write(json.getBytes(StandardCharsets.UTF_8));
         out.flush();
         out.close();
     }
