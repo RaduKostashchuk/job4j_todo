@@ -33,19 +33,19 @@
                             <c:out value="${error}"/>
                         </div>
                     </c:if>
-                    <div class="form-group">
+                    <div class="form-group m-1">
                         <label>Почта</label>
                         <input type="text" class="form-control" id="emailInput" name="email">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group m-1">
                         <label>Имя</label>
                         <input type="text" class="form-control" id="nameInput" name="name">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group m-1">
                         <label>Пароль</label>
                         <input type="text" class="form-control" id="passwordInput" name="password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Отправить</button>
+                    <button type="submit" class="btn btn-primary m-1">Отправить</button>
                 </form>
             </div>
         </div>

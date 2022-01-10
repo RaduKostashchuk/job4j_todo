@@ -38,15 +38,15 @@
                             <c:out value="${regMessage}"/>
                         </div>
                     </c:if>
-                    <div class="form-group">
+                    <div class="form-group m-1">
                         <label>Почта</label>
                         <input type="text" class="form-control" id="emailInput" name="email">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group m-1">
                         <label>Пароль</label>
                         <input type="text" class="form-control" id="passwordInput" name="password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <button type="submit" class="btn btn-primary m-1">Войти</button>
                     <a href="<%=request.getContextPath()%>/reg.jsp" class="card-link">Регистрация</a>
                 </form>
             </div>

@@ -12,6 +12,7 @@ import ru.job4j.todo.model.User;
 
 import javax.persistence.NoResultException;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.function.Function;
 
 public class Persistence implements AutoCloseable {
@@ -33,7 +34,10 @@ public class Persistence implements AutoCloseable {
     }
 
     public void save(Item item, String[] catIds) {
-        Session session = sf.openSession();
+        Session session = sf
+                .withOptions()
+                .jdbcTimeZone(TimeZone.getTimeZone("UTC"))
+                .openSession();
         session.beginTransaction();
         for (String el : catIds) {
             Category category = session.find(Category.class, Integer.parseInt(el));
@@ -81,7 +85,10 @@ public class Persistence implements AutoCloseable {
     }
 
     private <T> T tx(Function<Session, T> command) {
-        Session session = sf.openSession();
+        Session session = sf
+                .withOptions()
+                .jdbcTimeZone(TimeZone.getTimeZone("UTC"))
+                .openSession();
         try (session) {
             Transaction tx = session.beginTransaction();
             T result = command.apply(session);
