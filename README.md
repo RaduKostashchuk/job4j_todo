@@ -1,25 +1,33 @@
 # job4j_todo
+## О проекте
 
-It is task tracking application.
+Это прриложение реализует список задач.
 
-User can create task by giving task description and category.
+Пользователь может создать задачу, указав ее имя и категорию.
 
-Task status can be changed later by checkbox.
+Статус задачи может быть изменен с помощью чекбокса.
 
-There is a filter for displaying only running tasks.
+## Обзор
 
-Login page.
-
-![ScreenShot](images/login.png)
-
-Registration page.
-
-![ScreenShot](images/reg.png)
-
-Screen with all tasks.
+Главная страница.
 
 ![ScreenShot](images/all.png)
 
-Screen with running tasks.
+Главная страница, выбраны только не выполненные задачи.
 
 ![ScreenShot](images/running.png)
+
+## Настройка и сборка
+
+У приложения есть один файл конфигурации: /src/main/resources/hibernate.cfg.xml,
+
+в котором необходимо указать настройки Hibernate.
+
+Сборка осуществляется командой: mvn package.
+
+После сборки приложение нужно развернуть в контейнере сервлетов и настроить сервер баз данных.
+
+## Контакты
+
+Email: kostasc@mail.ru
+Telegram: @rkostashchuk

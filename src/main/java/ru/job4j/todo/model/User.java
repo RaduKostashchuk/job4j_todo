@@ -1,7 +1,5 @@
 package ru.job4j.todo.model;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 import java.util.Objects;
 
